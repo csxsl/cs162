@@ -8,7 +8,8 @@ int main(int argc, char *argv[]) {
     FILE *f;
     int lines,words,bytes,chars;
     char buf[BUF_SIZE];
-    int flag,ch;
+    int flag;
+    char ch;
     struct stat file_infos;
     flag = lines = bytes = words = chars = 0;
     
@@ -48,9 +49,32 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
+	fclose(f);
+        printf("%d %d %d %s\n",lines,words,bytes,argv[1]);
     } else if (argc == 1) {
-
+	while((ch = getchar()) != EOF) {
+	    chars++;
+	    bytes += sizeof(ch);
+	    if(ch == ' ' || ch == '\t') {
+		if(flag == 1) {
+			flag = 0;
+			words ++;
+		}	
+		continue;
+	    }
+	    if(ch == '\n') {
+                 lines++;
+                 if(flag == 1) {
+                        words++;
+                 }
+                 flag = 0;
+                 continue;
+            }
+            if(flag ==0) {
+                 flag = 1;
+            }
+	}
+	printf("%d %d %d\n",lines,words,bytes);
     }
-    printf("%d %d %d %s\n",lines,words,bytes,argv[1]);
     return 0;
 }

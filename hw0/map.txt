@@ -1,0 +1,16 @@
+1 Use objdump with the -D flag on the map executable.Which of the address from the output of running ./map are defined in the executable,and which segment/section is each defined in?
+main 0x4005c2 in section .text
+recur 0x40057d in section .text
+static data 0x601048 in section .data
+2 Make a list of the important segment,and what they are used for (look up their names on the Interat if you don't know)
+text:code segment contains executable instructions
+initialized data:contains global variables and static variables
+bss:unitialized data segment, contains unitialized global and staic variables
+3 What direction is the stack growing in?
+down/low address
+4 How large is the stack frame for each recursive call?
+48 byte
+5 Where is the heap? What direction is it growing in?
+0xab9010 up/high address
+6 Are the two malloc() ed memory areas contiguous?
+not contiguous, buf1 size is 100 byte ,howerver , the distance of buf1 and buf2 is 112

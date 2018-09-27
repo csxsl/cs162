@@ -1,0 +1,17 @@
+1 What is the value of argv 
+  进入gdb 使用print argv,输出信息为0x7fffffffe648,该值为指向参数字符串的指针地址
+2 What is pointed to by argv
+  使用print argv[0] 输出信息为 /home/long279642779/homework/hw0/wc
+3 What is the addrss of the function main?
+  disassemble main 后得到汇编程序其中main函数的起始地址为0x000000000040070d
+4 Try info stack. Explain what you see.
+  包含以下几部分
+  #当前栈层数 函数名main (argc 参数个数 argv 参数字符串)  at c文件:行号
+5 Try info frame. Explain what you see.
+  当前代码段偏移地址
+  参数表起始地址
+  局部变量起始地址 还有一些寄存器信息
+6 Try info registers. Which registers are holding aspects of the program that you recognize?
+  rax 当前代码段偏移地址
+  rsi 参数argv起始地址
+  rbp 参数表起始地址
