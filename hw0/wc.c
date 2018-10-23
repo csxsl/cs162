@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     char ch;
     struct stat file_infos;
     flag = lines = bytes = words = chars = 0;
-    
+// 参数中包含文件    
     if(argc == 2) {
         int ret = stat(argv[1],&file_infos); 
         if (ret != 0) {
@@ -21,8 +21,10 @@ int main(int argc, char *argv[]) {
         }
         mode_t mode = file_infos.st_mode;
         if (S_ISDIR(mode)){
+// 判断是目录文件
                printf("error : %s is a directory\n",argv[1]);
-        } else {
+        } else if(S_ISREG(mode)) {
+// 判断是普通文件
             bytes = file_infos.st_size;
             if((f = fopen(argv[1],"r")) != NULL) {
                 while((ch = fgetc(f)) != EOF){
@@ -52,6 +54,7 @@ int main(int argc, char *argv[]) {
 	fclose(f);
         printf("%d %d %d %s\n",lines,words,bytes,argv[1]);
     } else if (argc == 1) {
+// 输入参数中不包含文件 从标准输入文件输入
 	while((ch = getchar()) != EOF) {
 	    chars++;
 	    bytes += sizeof(ch);
